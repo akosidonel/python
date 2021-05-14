@@ -1,23 +1,27 @@
-import calculator as c
+import cv2
+import numpy as np
 
-num = int(input('Enter number 1: '))
-num2 = int(input('Enter number 2: '))
 
-print('choose operator...')
-print('1. Addition')
-print('2. Subtraction')
-print('3. Multiplication')
+cap = cv2.VideoCapture(0)
 
-pili = int(input('Enter selection: '))
+while True:
+    ret, frame = cap.read()
+    width = int(cap.get(3))
+    height = int(cap.get(4))
 
-if pili == 1:
-    add = c.sum(num,num2)
-    print(add)
-elif pili == 2:
-    sub = c.sub(num,num2)
-    print(sub)
-elif pili == 3:
-    prod = c.prod(num,num2)
-    print(prod)
-else:
-    print('invalid selection')
+    image = np.zeros(frame.shape, np.uint8)
+    smaller_frame =cv2.resize(frame,(0,0),fx=0.5,fy=0.5)
+    image [:height//2,:width//2] = smaller_frame
+    image [height//2:,:width//2] = smaller_frame
+    image [:height//2,width//2:] = smaller_frame
+    image [height//2:,width//2:] = smaller_frame
+
+    
+
+    cv2.imshow('frame',image)
+
+    if cv2.waitKey(1)  & 0xFF == ord('q'):
+        break
+
+cap.release()
+cv2.destroyAllWindows()
