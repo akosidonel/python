@@ -7,7 +7,7 @@ traffic_light1 = TrafficLights(22,27,17) # north bound traffic light
 traffic_light2 = TrafficLights(13,6,5) # south bound traffic light
 traffic_light3 = TrafficLights(20,16,12) # valley 1 traffic light
 
-#set up HC-SR04 pin  as input
+#set up HC-SR04 echo and trigger pin as input
 sensor = DistanceSensor(23,4,max_distance=2) 
 
 #signal light function for sensor detection
@@ -79,8 +79,8 @@ try:
                 traffic_light3.green.off() 
                 sleep(1)# standby for 1 sec
                 
-                # check again if the distance value is less than 100cm .. then break the loop
-                break
+                 break #if the distance value is less than 100cm .. then break the loop
+               
     pause()     
 except KeyboardInterrupt: #ctrl C to turn off the LED and sensor
     traffic_light1.off()
