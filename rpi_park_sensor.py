@@ -13,11 +13,11 @@ ultrasonic = DistanceSensor(echo=23,trigger=4)
 try:
     while True:
         ultrasonic.wait_for_in_range()
-        print('Occoupied')
+        print('Occupied')
         green.off()
         red.on()
         ultrasonic.wait_for_out_of_range()
-        print('Vaccant')
+        print('Vacant')
         green.on()
         red.off()
         
